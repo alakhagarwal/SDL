@@ -5,16 +5,17 @@ spring:
   application:
     name: student-wellness-backend
   datasource:
-    url: jdbc:h2:file:./data/wellnessdb;DB_CLOSE_DELAY=-1
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: ""
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+    # =========================================================================
+    # PostgreSQL Configuration (localhost:5432)
+    # Change 'wellnessdb' to your database name if needed.
+    # Enter your local PostgreSQL credentials below:
+    # =========================================================================
+    url: jdbc:postgresql://localhost:5432/wellnessdb
+    username: postgres                    # <-- Enter your PostgreSQL username here
+    password: Alakh@2004 # <-- Enter your PostgreSQL password here
+    driver-class-name: org.postgresql.Driver
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     show-sql: false

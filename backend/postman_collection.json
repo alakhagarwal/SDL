@@ -1,0 +1,529 @@
+{
+  "info": {
+    "name": "Student Wellness Portal - Complete API Test Suite",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Authentication - Student Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () { pm.response.to.have.status(200); });",
+              "var jsonData = pm.response.json();",
+              "pm.test('Token received', function () { pm.expect(jsonData.token).to.be.a('string'); });",
+              "pm.test('Role is STUDENT', function () { pm.expect(jsonData.role).to.eql('STUDENT'); });",
+              "pm.environment.set('studentToken', jsonData.token);",
+              "pm.environment.set('studentId', jsonData.userId);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"24ucs001@lnmiit.ac.in\",\n  \"password\": \"password123\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/auth/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "auth", "login"]
+        }
+      }
+    },
+    {
+      "name": "2. Authentication - Counselor Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () { pm.response.to.have.status(200); });",
+              "var jsonData = pm.response.json();",
+              "pm.test('Role is COUNSELOR', function () { pm.expect(jsonData.role).to.eql('COUNSELOR'); });",
+              "pm.environment.set('counselorToken', jsonData.token);",
+              "pm.environment.set('counselorId', jsonData.userId);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"counselor@lnmiit.ac.in\",\n  \"password\": \"password123\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/auth/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "auth", "login"]
+        }
+      }
+    },
+    {
+      "name": "3. Authentication - Admin Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () { pm.response.to.have.status(200); });",
+              "var jsonData = pm.response.json();",
+              "pm.test('Role is ADMIN', function () { pm.expect(jsonData.role).to.eql('ADMIN'); });",
+              "pm.environment.set('adminToken', jsonData.token);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"admin@lnmiit.ac.in\",\n  \"password\": \"password123\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/auth/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "auth", "login"]
+        }
+      }
+    },
+    {
+      "name": "4. Security - FR-003 Invalid Credentials Handling",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 401 Unauthorized', function () { pm.response.to.have.status(401); });",
+              "var jsonData = pm.response.json();",
+              "pm.test('Generic error message without revealing user existence (FR-003)', function () {",
+              "  pm.expect(jsonData.message).to.include('Invalid email or password credentials');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"24ucs001@lnmiit.ac.in\",\n  \"password\": \"wrongpassword\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/auth/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "auth", "login"]
+        }
+      }
+    },
+    {
+      "name": "5. Security - BR-001 Institutional Email Domain Restriction",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 400 Bad Request', function () { pm.response.to.have.status(400); });",
+              "var jsonData = pm.response.json();",
+              "pm.test('Blocks non @lnmiit.ac.in registration (BR-001)', function () {",
+              "  pm.expect(jsonData.message).to.include('BR-001');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fullName\": \"External Student\",\n  \"email\": \"student@gmail.com\",\n  \"password\": \"password123\",\n  \"role\": \"STUDENT\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/auth/register",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "auth", "register"]
+        }
+      }
+    },
+    {
+      "name": "6. Service Catalog - Get Active Services",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () { pm.response.to.have.status(200); });",
+              "var services = pm.response.json();",
+              "pm.test('Catalog returns list of services', function () { pm.expect(services.length).to.be.above(0); });",
+              "pm.environment.set('testServiceId', services[0].serviceId);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{studentToken}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/services",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "services"]
+        }
+      }
+    },
+    {
+      "name": "7. UC-005 - Student View Current Requests",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () { pm.response.to.have.status(200); });",
+              "var reqs = pm.response.json();",
+              "pm.test('Current requests returned', function () { pm.expect(Array.isArray(reqs)).to.be.true; });"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{studentToken}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/requests/my",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "requests", "my"]
+        }
+      }
+    },
+    {
+      "name": "8. UC-010 - Counselor Triage Queue",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () { pm.response.to.have.status(200); });",
+              "var queue = pm.response.json();",
+              "pm.test('Triage queue is an array', function () { pm.expect(Array.isArray(queue)).to.be.true; });"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{counselorToken}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/triage/queue",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "triage", "queue"]
+        }
+      }
+    },
+    {
+      "name": "9. Counselor - Publish Available 45-Min Slot",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 201 Created', function () { pm.response.to.have.status(201); });",
+              "var slot = pm.response.json();",
+              "pm.test('Slot is AVAILABLE', function () { pm.expect(slot.status).to.eql('AVAILABLE'); });",
+              "pm.environment.set('freshSlotId', slot.slotId);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{counselorToken}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"slotDate\": \"2026-11-25\",\n  \"startTime\": \"15:00:00\",\n  \"endTime\": \"15:45:00\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/counselor/slots",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "counselor", "slots"]
+        }
+      }
+    },
+    {
+      "name": "10. Counselor - View All Published Slots",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () { pm.response.to.have.status(200); });",
+              "var slots = pm.response.json();",
+              "pm.test('Slots array returned', function () { pm.expect(slots.length).to.be.above(0); });"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{counselorToken}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/counselors/slots/all",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "counselors", "slots", "all"]
+        }
+      }
+    },
+    {
+      "name": "11. UC-007 - Student Scheduled Appointments",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () { pm.response.to.have.status(200); });",
+              "var appts = pm.response.json();",
+              "pm.test('Appointments list returned', function () { pm.expect(Array.isArray(appts)).to.be.true; });",
+              "if (appts.length > 0) {",
+              "  pm.test('Confirmed appointment has Telehealth link (BR-011)', function () {",
+              "    pm.expect(appts[0].meetingLink).to.include('meet.jit.si');",
+              "  });",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{studentToken}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/appointments/my",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "appointments", "my"]
+        }
+      }
+    },
+    {
+      "name": "12. Habit Tracking - Log Daily Self-Care & Mood",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () { pm.response.to.have.status(200); });",
+              "var log = pm.response.json();",
+              "pm.test('Habit logged successfully', function () {",
+              "  pm.expect(log.sleepHours).to.eql(7.5);",
+              "  pm.expect(log.moodScore).to.eql(4);",
+              "  pm.expect(log.streakCount).to.be.above(0);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{studentToken}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"sleepHours\": 7.5,\n  \"waterIntakeLiters\": 3.0,\n  \"meditationMinutes\": 15,\n  \"workoutMinutes\": 30,\n  \"moodScore\": 4,\n  \"journalTag\": \"Newman automated test run - habits logged\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/habits/log",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "habits", "log"]
+        }
+      }
+    },
+    {
+      "name": "13. Habit Tracking - 7-Day Trend Metrics",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () { pm.response.to.have.status(200); });",
+              "var trends = pm.response.json();",
+              "pm.test('Trend analytics calculated', function () {",
+              "  pm.expect(trends.currentStreak).to.be.above(0);",
+              "  pm.expect(trends.averageSleepHours).to.be.above(0);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{studentToken}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/habits/trends",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "habits", "trends"]
+        }
+      }
+    },
+    {
+      "name": "14. In-App Notification Center - View Notifications",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () { pm.response.to.have.status(200); });",
+              "var notifs = pm.response.json();",
+              "pm.test('Notifications delivered', function () { pm.expect(Array.isArray(notifs)).to.be.true; });"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{studentToken}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/notifications",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "notifications"]
+        }
+      }
+    },
+    {
+      "name": "15. Psychoeducational Library - Browse Articles",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () { pm.response.to.have.status(200); });",
+              "var articles = pm.response.json();",
+              "pm.test('Articles returned', function () { pm.expect(articles.length).to.be.above(0); });"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{studentToken}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/resources",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "resources"]
+        }
+      }
+    },
+    {
+      "name": "16. Admin - Institutional Metrics & Audit Logs",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200 OK', function () { pm.response.to.have.status(200); });",
+              "var stats = pm.response.json();",
+              "pm.test('Stats contain user & request counts', function () {",
+              "  pm.expect(stats.totalUsers).to.be.above(0);",
+              "  pm.expect(stats.totalRequests).to.be.above(0);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/admin/stats",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "admin", "stats"]
+        }
+      }
+    }
+  ]
+}

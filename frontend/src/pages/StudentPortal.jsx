@@ -101,49 +101,49 @@ const StudentPortal = () => {
       {/* Student Hero Banner */}
       <div
         style={{
-          background: 'linear-gradient(135deg, #8b1523 0%, #560a13 100%)',
-          borderRadius: '16px',
-          padding: '2rem',
+          background: 'linear-gradient(135deg, #8b1523 0%, #6b0f1a 60%, #4d0910 100%)',
+          borderRadius: '14px',
+          padding: '1.75rem 2rem',
           color: '#ffffff',
-          marginBottom: '2rem',
-          boxShadow: '0 10px 25px -5px rgba(139, 21, 35, 0.3)',
+          marginBottom: '1.75rem',
+          boxShadow: '0 8px 20px rgba(139, 21, 35, 0.25)',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
           flexWrap: 'wrap',
-          gap: '1.5rem',
+          gap: '1.25rem',
         }}
       >
         <div>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', background: 'rgba(255,255,255,0.15)', padding: '0.25rem 0.75rem', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 600, marginBottom: '0.75rem' }}>
-            <span>LNMIIT Institutional Care</span>
-            <span>•</span>
-            <span>Confidential & Conflict-Free</span>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', background: 'rgba(255,255,255,0.12)', padding: '0.2rem 0.65rem', borderRadius: '9999px', fontSize: '0.72rem', fontWeight: 600, marginBottom: '0.65rem', letterSpacing: '0.02em' }}>
+            <span>LNMIIT Student Wellness Portal</span>
+            <span style={{ opacity: 0.6 }}>·</span>
+            <span>Strictly Confidential</span>
           </div>
-          <h2 style={{ fontSize: '1.85rem', color: '#ffffff', fontWeight: 700, marginBottom: '0.35rem' }}>
-            Welcome back, {user?.fullName || 'Student'}
+          <h2 style={{ fontSize: '1.65rem', color: '#ffffff', fontWeight: 700, marginBottom: '0.3rem', letterSpacing: '-0.03em' }}>
+            Welcome back, {user?.fullName?.split(' ')[0] || 'Student'}
           </h2>
-          <p style={{ fontSize: '0.9rem', color: '#fecdd3', maxWidth: '600px', lineHeight: 1.4 }}>
-            Access confidential campus mental health and counseling services, schedule consultations with dedicated psychologists, and track your daily self-care habits.
+          <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.75)', maxWidth: '520px', lineHeight: 1.5 }}>
+            Access mental health services, schedule consultations, and track your daily wellness — all in one place.
           </p>
         </div>
 
-        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: '0.65rem', flexWrap: 'wrap' }}>
           <button
             className="btn"
-            style={{ background: '#ffffff', color: '#8b1523', fontWeight: 700 }}
+            style={{ background: '#ffffff', color: '#8b1523', fontWeight: 700, fontSize: '0.85rem' }}
             onClick={() => { setModalSelectedService(services[0]); setIsRequestModalOpen(true); }}
           >
-            <PlusCircle size={16} />
-            <span>Request Counseling Support</span>
+            <PlusCircle size={15} />
+            <span>Request Support</span>
           </button>
           <button
             className="btn"
-            style={{ background: 'rgba(255,255,255,0.15)', color: '#ffffff', border: '1px solid rgba(255,255,255,0.3)' }}
+            style={{ background: 'rgba(255,255,255,0.12)', color: '#ffffff', border: '1px solid rgba(255,255,255,0.25)', fontSize: '0.85rem' }}
             onClick={() => setIsCrisisModalOpen(true)}
           >
-            <LifeBuoy size={16} />
-            <span>24/7 Crisis Helplines</span>
+            <LifeBuoy size={15} />
+            <span>Crisis Helplines</span>
           </button>
         </div>
       </div>
@@ -201,22 +201,22 @@ const StudentPortal = () => {
               </div>
 
               {myRequests.length === 0 ? (
-                <div style={{ textAlign: 'center', padding: '2.5rem', color: '#64748b' }}>
-                  <HeartHandshake size={36} color="#cbd5e1" style={{ marginBottom: '0.5rem' }} />
-                  <p style={{ fontWeight: 600 }}>No active support requests submitted.</p>
-                  <p style={{ fontSize: '0.8rem' }}>Browse services below to submit a confidential inquiry.</p>
+                <div className="empty-state">
+                  <HeartHandshake size={32} color="#d1d5db" />
+                  <p style={{ fontWeight: 600, color: '#6b7280' }}>No active support requests.</p>
+                  <p>Browse services to submit a confidential inquiry.</p>
                 </div>
               ) : (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
                   {myRequests.map((req) => (
                     <div
                       key={req.requestId}
                       style={{
-                        border: '1px solid #e2e8f0',
-                        borderRadius: '12px',
-                        padding: '1.15rem',
-                        background: req.status === 'TRIAGED' ? '#f0fdf4' : '#ffffff',
-                        borderLeft: req.status === 'TRIAGED' ? '4px solid #16a34a' : '4px solid var(--primary)',
+                        border: '1px solid #e5e9ef',
+                        borderRadius: '10px',
+                        padding: '1rem 1.15rem',
+                        background: req.status === 'TRIAGED' ? '#f6fef9' : '#ffffff',
+                        borderLeft: req.status === 'TRIAGED' ? '3px solid #16a34a' : '3px solid var(--primary)',
                       }}
                     >
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
@@ -537,11 +537,18 @@ const StudentPortal = () => {
           {articles.map((art) => (
             <div key={art.articleId} className="card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <div>
-                <img
-                  src={art.thumbnailUrl}
-                  alt={art.title}
-                  style={{ width: '100%', height: '140px', objectFit: 'cover', borderRadius: '8px', marginBottom: '0.85rem' }}
-                />
+                <div style={{ width: '100%', height: '140px', borderRadius: '8px', overflow: 'hidden', backgroundColor: '#f1f5f9', marginBottom: '0.85rem' }}>
+                  <img
+                    src={art.thumbnailUrl || 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=600&auto=format&fit=crop&q=80'}
+                    alt={art.title}
+                    loading="lazy"
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=600&auto=format&fit=crop&q=80';
+                    }}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  />
+                </div>
                 <span
                   style={{
                     fontSize: '0.7rem',

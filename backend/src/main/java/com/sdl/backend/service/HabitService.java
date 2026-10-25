@@ -74,13 +74,19 @@ public class HabitService {
     }
 
     private int calculateStreak(Long studentId, LocalDate logDate) {
-        // Check if previous consecutive day was logged
+        // If today's log already exists (update scenario), return its existing streak
+        Optional<HabitLog> todayExisting = habitLogRepository.findByStudentUserIdAndLogDate(studentId, logDate);
+        if (todayExisting.isPresent()) {
+            // Already counted for today — preserve existing streak
+            return todayExisting.get().getStreakCount();
+        }
+        // New entry: check if yesterday was logged consecutively
         LocalDate yesterday = logDate.minusDays(1);
         Optional<HabitLog> yesterdayLog = habitLogRepository.findByStudentUserIdAndLogDate(studentId, yesterday);
         if (yesterdayLog.isPresent()) {
             return yesterdayLog.get().getStreakCount() + 1;
         }
-        return 1;
+        return 1; // Fresh streak start
     }
 
     // FR-052 & AC-20: 7-day trend metrics and streak calculation

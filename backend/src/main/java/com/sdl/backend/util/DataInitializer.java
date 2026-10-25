@@ -404,7 +404,7 @@ public class DataInitializer implements CommandLineRunner {
                     .authorStaff(counselorRajesh)
                     .tags("Sleep, Hostel, Circadian, Health")
                     .readTimeMinutes(5)
-                    .thumbnailUrl("https://images.unsplash.com/photo-1511295742362-92c96b124e52?w=600&auto=format&fit=crop&q=80")
+                    .thumbnailUrl("https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=600&auto=format&fit=crop&q=80")
                     .status("Published")
                     .publishedDate(LocalDate.now().minusDays(5))
                     .build();

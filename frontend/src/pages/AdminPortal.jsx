@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api';
-import { ShieldCheck, BarChart3, Users, Calendar, Activity, Database, Check } from 'lucide-react';
 
 const AdminPortal = () => {
   const [stats, setStats] = useState(null);
@@ -34,7 +33,6 @@ const AdminPortal = () => {
         }}
       >
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', background: 'rgba(255,255,255,0.1)', padding: '0.25rem 0.75rem', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 600, marginBottom: '0.75rem', color: '#a5b4fc' }}>
-          <ShieldCheck size={14} />
           <span>System Administration & Institutional Governance</span>
         </div>
         <h2 style={{ fontSize: '1.85rem', color: '#ffffff', fontWeight: 700, marginBottom: '0.35rem' }}>
@@ -47,51 +45,39 @@ const AdminPortal = () => {
 
       {/* Aggregate Institutional Metrics Cards */}
       <div className="grid-4" style={{ marginBottom: '2rem' }}>
-        <div className="card">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-            <div style={{ padding: '0.5rem', background: '#eff6ff', borderRadius: '8px', color: '#2563eb' }}>
-              <Users size={20} />
-            </div>
-            <div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 700 }}>{stats?.totalUsers || 0}</div>
-              <div style={{ fontSize: '0.78rem', color: '#64748b' }}>Registered Institutional Users</div>
-            </div>
+        <div className="card" style={{ borderTop: '3px solid #2563eb' }}>
+          <div style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.2rem' }}>
+            {stats?.totalUsers || 0}
+          </div>
+          <div style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 500 }}>
+            Registered Users
           </div>
         </div>
 
-        <div className="card">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-            <div style={{ padding: '0.5rem', background: '#fef2f2', borderRadius: '8px', color: '#dc2626' }}>
-              <Activity size={20} />
-            </div>
-            <div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 700 }}>{stats?.totalRequests || 0}</div>
-              <div style={{ fontSize: '0.78rem', color: '#64748b' }}>Total Support Requests</div>
-            </div>
+        <div className="card" style={{ borderTop: '3px solid #8c1616' }}>
+          <div style={{ fontSize: '1.75rem', fontWeight: 700, color: '#8c1616', marginBottom: '0.2rem' }}>
+            {stats?.totalRequests || 0}
+          </div>
+          <div style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 500 }}>
+            Total Support Requests
           </div>
         </div>
 
-        <div className="card">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-            <div style={{ padding: '0.5rem', background: '#ecfdf5', borderRadius: '8px', color: '#059669' }}>
-              <Calendar size={20} />
-            </div>
-            <div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 700 }}>{stats?.totalAppointments || 0}</div>
-              <div style={{ fontSize: '0.78rem', color: '#64748b' }}>Consultations Scheduled</div>
-            </div>
+        <div className="card" style={{ borderTop: '3px solid #059669' }}>
+          <div style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.2rem' }}>
+            {stats?.totalAppointments || 0}
+          </div>
+          <div style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 500 }}>
+            Consultations Scheduled
           </div>
         </div>
 
-        <div className="card">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-            <div style={{ padding: '0.5rem', background: '#faf5ff', borderRadius: '8px', color: '#7c3aed' }}>
-              <Database size={20} />
-            </div>
-            <div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 700 }}>{stats?.activeServices || 0}</div>
-              <div style={{ fontSize: '0.78rem', color: '#64748b' }}>Active Wellness Services</div>
-            </div>
+        <div className="card" style={{ borderTop: '3px solid #7c3aed' }}>
+          <div style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.2rem' }}>
+            {stats?.activeServices || 0}
+          </div>
+          <div style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 500 }}>
+            Active Wellness Services
           </div>
         </div>
       </div>
@@ -131,7 +117,7 @@ const AdminPortal = () => {
                         fontSize: '0.72rem',
                         fontWeight: 700,
                         background: log.actionType.includes('EMERGENCY') ? '#fee2e2' : log.actionType.includes('TRIAGE') ? '#eff6ff' : '#f1f5f9',
-                        color: log.actionType.includes('EMERGENCY') ? '#991b1b' : log.actionType.includes('TRIAGE') ? '#1e40af' : '#475569',
+                        color: log.actionType.includes('EMERGENCY') ? '#8c1616' : log.actionType.includes('TRIAGE') ? '#1e40af' : '#475569',
                       }}
                     >
                       {log.actionType}

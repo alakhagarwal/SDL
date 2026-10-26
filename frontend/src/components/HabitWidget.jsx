@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api';
-import { Flame, Moon, Droplets, Check, Lock, TrendingUp } from 'lucide-react';
 
 const HabitWidget = () => {
   const [trends, setTrends] = useState(null);
@@ -56,11 +55,6 @@ const HabitWidget = () => {
     }
   };
 
-  const getMoodEmoji = (score) => {
-    const e = { 1: '😞', 2: '🙁', 3: '😐', 4: '🙂', 5: '🌟' };
-    return e[score] || '🙂';
-  };
-
   const getMoodLabel = (score) => {
     const l = { 1: 'Struggling', 2: 'Low', 3: 'Neutral', 4: 'Good', 5: 'Thriving' };
     return l[score] || 'Good';
@@ -80,27 +74,22 @@ const HabitWidget = () => {
           </p>
         </div>
 
-        {/* Streak Badge — shows flame only if active */}
+        {/* Streak Badge — clean typography */}
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
             gap: '0.35rem',
-            background: streak > 0 ? '#fff7ed' : '#f8fafc',
-            border: `1px solid ${streak > 0 ? '#fed7aa' : '#e2e8f0'}`,
+            background: streak > 0 ? '#fdf2f2' : '#f8fafc',
+            border: `1px solid ${streak > 0 ? '#fecaca' : '#e2e8f0'}`,
             padding: '0.35rem 0.75rem',
             borderRadius: '9999px',
-            color: streak > 0 ? '#c2410c' : '#94a3b8',
+            color: streak > 0 ? '#8c1616' : '#94a3b8',
             fontWeight: 700,
             fontSize: '0.82rem',
           }}
         >
-          <Flame
-            size={17}
-            fill={streak > 0 ? '#f97316' : 'none'}
-            color={streak > 0 ? '#ea580c' : '#cbd5e1'}
-          />
-          <span>{streak} day{streak !== 1 ? 's' : ''}</span>
+          <span>Streak: {streak} day{streak !== 1 ? 's' : ''}</span>
         </div>
       </div>
 
@@ -115,12 +104,8 @@ const HabitWidget = () => {
             color: '#14532d',
             fontSize: '0.82rem',
             marginBottom: '1rem',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.45rem',
           }}
         >
-          <Check size={15} />
           <span>Habits saved — streak updated!</span>
         </div>
       )}
@@ -132,8 +117,7 @@ const HabitWidget = () => {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '0.85rem' }}>
 
           <div style={{ padding: '0.75rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '10px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginBottom: '0.35rem' }}>
-              <Moon size={14} color="#64748b" />
+            <div style={{ marginBottom: '0.35rem' }}>
               <span style={{ fontSize: '0.78rem', fontWeight: 600, color: '#334155' }}>
                 Sleep: <span style={{ color: 'var(--primary)' }}>{sleepHours}h</span>
               </span>
@@ -142,13 +126,12 @@ const HabitWidget = () => {
               type="range" min="0" max="14" step="0.5"
               value={sleepHours}
               onChange={(e) => setSleepHours(e.target.value)}
-              style={{ width: '100%', accentColor: '#8b1523' }}
+              style={{ width: '100%', accentColor: '#8c1616' }}
             />
           </div>
 
           <div style={{ padding: '0.75rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '10px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginBottom: '0.35rem' }}>
-              <Droplets size={14} color="#64748b" />
+            <div style={{ marginBottom: '0.35rem' }}>
               <span style={{ fontSize: '0.78rem', fontWeight: 600, color: '#334155' }}>
                 Water: <span style={{ color: 'var(--primary)' }}>{waterIntake}L</span>
               </span>
@@ -157,7 +140,7 @@ const HabitWidget = () => {
               type="range" min="0.5" max="6" step="0.5"
               value={waterIntake}
               onChange={(e) => setWaterIntake(e.target.value)}
-              style={{ width: '100%', accentColor: '#8b1523' }}
+              style={{ width: '100%', accentColor: '#8c1616' }}
             />
           </div>
         </div>
@@ -167,7 +150,7 @@ const HabitWidget = () => {
           <label className="form-label" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span>Mood Check-In</span>
             <span style={{ color: 'var(--primary)', fontWeight: 700, fontSize: '0.82rem' }}>
-              {getMoodEmoji(Number(moodScore))} {getMoodLabel(Number(moodScore))}
+              Level {moodScore}: {getMoodLabel(Number(moodScore))}
             </span>
           </label>
           <div style={{ display: 'flex', gap: '0.35rem' }}>
@@ -184,13 +167,14 @@ const HabitWidget = () => {
                     ? '2px solid var(--primary)'
                     : '1px solid #e2e8f0',
                   background: Number(moodScore) === score ? 'var(--primary-light)' : '#ffffff',
-                  fontWeight: 600,
-                  fontSize: '0.88rem',
+                  fontWeight: 700,
+                  fontSize: '0.82rem',
                   color: Number(moodScore) === score ? 'var(--primary)' : '#64748b',
                   transition: 'all 0.15s ease',
+                  cursor: 'pointer',
                 }}
               >
-                {getMoodEmoji(score)}
+                {score}
               </button>
             ))}
           </div>
@@ -213,7 +197,6 @@ const HabitWidget = () => {
           style={{ width: '100%' }}
           disabled={saving}
         >
-          <Check size={14} />
           <span>{saving ? 'Saving...' : isLoggedToday ? "Update Today's Entry" : "Log Today's Habits"}</span>
         </button>
       </form>
@@ -221,8 +204,7 @@ const HabitWidget = () => {
       {/* 7-Day Trend */}
       <div style={{ borderTop: '1px solid #f1f5f9', paddingTop: '1rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-            <TrendingUp size={14} color="#64748b" />
+          <div>
             <span style={{ fontSize: '0.82rem', fontWeight: 600, color: '#334155' }}>7-Day Trend</span>
           </div>
           <span style={{ fontSize: '0.71rem', color: '#94a3b8' }}>
@@ -249,7 +231,7 @@ const HabitWidget = () => {
                         width: '100%',
                         height: `${heightPct}%`,
                         background: isToday
-                          ? 'linear-gradient(180deg, #8b1523 0%, #c25568 100%)'
+                          ? 'linear-gradient(180deg, #8c1616 0%, #bd3a3a 100%)'
                           : 'linear-gradient(180deg, #94a3b8 0%, #cbd5e1 100%)',
                         borderRadius: '4px 4px 3px 3px',
                         transition: 'height 0.3s ease',
@@ -277,8 +259,7 @@ const HabitWidget = () => {
         </div>
 
         {/* Privacy note */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '0.75rem', fontSize: '0.68rem', color: '#94a3b8' }}>
-          <Lock size={11} />
+        <div style={{ marginTop: '0.75rem', fontSize: '0.68rem', color: '#94a3b8' }}>
           <span>Habit data is private and never shared with counselors without your consent.</span>
         </div>
       </div>

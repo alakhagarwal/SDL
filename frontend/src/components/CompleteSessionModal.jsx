@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import api from '../api';
-import { X, FileText, CheckCircle2, ShieldCheck } from 'lucide-react';
 
 const CompleteSessionModal = ({ isOpen, onClose, appointment, onSuccess }) => {
   const [sessionSummary, setSessionSummary] = useState('');
@@ -45,8 +44,18 @@ const CompleteSessionModal = ({ isOpen, onClose, appointment, onSuccess }) => {
               Session Concluded • Student: {appointment.student?.fullName} ({appointment.appointmentDate})
             </p>
           </div>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-            <X size={20} color="#64748b" />
+          <button
+            onClick={onClose}
+            style={{
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              fontSize: '1.25rem',
+              color: '#64748b',
+              fontWeight: 700,
+            }}
+          >
+            ×
           </button>
         </div>
 
@@ -56,10 +65,10 @@ const CompleteSessionModal = ({ isOpen, onClose, appointment, onSuccess }) => {
               <div
                 style={{
                   padding: '0.85rem',
-                  background: '#fef2f2',
+                  background: '#fdf2f2',
                   border: '1px solid #fecaca',
                   borderRadius: '8px',
-                  color: '#991b1b',
+                  color: '#8c1616',
                   fontSize: '0.84rem',
                   marginBottom: '1rem',
                 }}
@@ -84,7 +93,7 @@ const CompleteSessionModal = ({ isOpen, onClose, appointment, onSuccess }) => {
             </div>
 
             <div className="form-group">
-              <label className="form-label">Session Summary & Therapeutic Discussion</label>
+              <label className="form-label">Session Summary &amp; Therapeutic Discussion</label>
               <textarea
                 className="form-textarea"
                 rows={3}
@@ -96,7 +105,7 @@ const CompleteSessionModal = ({ isOpen, onClose, appointment, onSuccess }) => {
             </div>
 
             <div className="form-group">
-              <label className="form-label">Clinical Observations & Mental State Exam (Confidential)</label>
+              <label className="form-label">Clinical Observations &amp; Mental State Exam (Confidential)</label>
               <textarea
                 className="form-textarea"
                 rows={2}
@@ -107,7 +116,7 @@ const CompleteSessionModal = ({ isOpen, onClose, appointment, onSuccess }) => {
             </div>
 
             <div className="form-group">
-              <label className="form-label">Action Plan & Student Homework</label>
+              <label className="form-label">Action Plan &amp; Student Homework</label>
               <textarea
                 className="form-textarea"
                 rows={2}
@@ -125,12 +134,8 @@ const CompleteSessionModal = ({ isOpen, onClose, appointment, onSuccess }) => {
                 borderRadius: '8px',
                 fontSize: '0.78rem',
                 color: '#475569',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
               }}
             >
-              <ShieldCheck size={18} color="var(--primary)" style={{ flexShrink: 0 }} />
               <span>
                 <strong>Confidential Clinical Record:</strong> Accessible solely to the authoring counselor and campus clinical health leads.
               </span>
@@ -142,7 +147,6 @@ const CompleteSessionModal = ({ isOpen, onClose, appointment, onSuccess }) => {
               Cancel
             </button>
             <button type="submit" className="btn btn-primary" disabled={submitting}>
-              <CheckCircle2 size={16} />
               <span>{submitting ? 'Archiving Case...' : 'Finalize & Archive Consultation'}</span>
             </button>
           </div>

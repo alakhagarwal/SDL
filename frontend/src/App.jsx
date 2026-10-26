@@ -22,7 +22,7 @@ const AppContent = () => {
           alignItems: 'center',
           justifyContent: 'center',
           gap: '1rem',
-          color: '#8b1523',
+          color: '#8c1616',
         }}
       >
         <div style={{ fontSize: '1.5rem', fontWeight: 700 }}>Student Wellness Portal</div>

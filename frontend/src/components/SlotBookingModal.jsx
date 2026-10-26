@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api';
-import { X, Calendar, Clock, Video, MapPin, AlertCircle, CheckCircle2 } from 'lucide-react';
 
 const SlotBookingModal = ({ isOpen, onClose, request, onSuccess }) => {
   const [slots, setSlots] = useState([]);
@@ -74,8 +73,18 @@ const SlotBookingModal = ({ isOpen, onClose, request, onSuccess }) => {
               Request #REQ-{request.requestId} • {request.service?.title}
             </p>
           </div>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-            <X size={20} color="#64748b" />
+          <button
+            onClick={onClose}
+            style={{
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              fontSize: '1.25rem',
+              color: '#64748b',
+              fontWeight: 700,
+            }}
+          >
+            ×
           </button>
         </div>
 
@@ -83,18 +92,19 @@ const SlotBookingModal = ({ isOpen, onClose, request, onSuccess }) => {
           <div className="modal-body" style={{ textAlign: 'center', padding: '2rem 1.5rem' }}>
             <div
               style={{
-                width: '56px',
-                height: '56px',
-                borderRadius: '50%',
+                display: 'inline-block',
                 background: '#d1fae5',
-                color: '#059669',
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                color: '#065f46',
+                fontWeight: 700,
+                fontSize: '0.82rem',
+                padding: '0.25rem 0.75rem',
+                borderRadius: '9999px',
                 marginBottom: '1rem',
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
               }}
             >
-              <CheckCircle2 size={32} />
+              Confirmed
             </div>
             <h3 style={{ color: '#065f46', fontSize: '1.25rem', marginBottom: '0.35rem' }}>
               Consultation Successfully Confirmed!
@@ -113,23 +123,14 @@ const SlotBookingModal = ({ isOpen, onClose, request, onSuccess }) => {
                 marginBottom: '1.5rem',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                <Calendar size={16} color="var(--primary)" />
-                <span style={{ fontSize: '0.88rem', fontWeight: 600 }}>
-                  Date: {confirmedAppt.appointmentDate}
-                </span>
+              <div style={{ marginBottom: '0.5rem', fontSize: '0.88rem', fontWeight: 600 }}>
+                Date: {confirmedAppt.appointmentDate}
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                <Clock size={16} color="var(--primary)" />
-                <span style={{ fontSize: '0.88rem', fontWeight: 600 }}>
-                  Time: {confirmedAppt.startTime} – {confirmedAppt.endTime}
-                </span>
+              <div style={{ marginBottom: '0.5rem', fontSize: '0.88rem', fontWeight: 600 }}>
+                Time: {confirmedAppt.startTime} – {confirmedAppt.endTime}
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                {confirmedAppt.mode === 'Telehealth' ? <Video size={16} color="#2563eb" /> : <MapPin size={16} color="#059669" />}
-                <span style={{ fontSize: '0.88rem', fontWeight: 600 }}>
-                  Mode: {confirmedAppt.mode} ({confirmedAppt.venue})
-                </span>
+              <div style={{ marginBottom: '0.5rem', fontSize: '0.88rem', fontWeight: 600 }}>
+                Mode: {confirmedAppt.mode} ({confirmedAppt.venue})
               </div>
 
               {confirmedAppt.meetingLink && (
@@ -150,9 +151,7 @@ const SlotBookingModal = ({ isOpen, onClose, request, onSuccess }) => {
                     target="_blank"
                     rel="noreferrer"
                     style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.4rem',
+                      display: 'inline-block',
                       color: '#2563eb',
                       fontWeight: 600,
                       fontSize: '0.85rem',
@@ -160,8 +159,7 @@ const SlotBookingModal = ({ isOpen, onClose, request, onSuccess }) => {
                       wordBreak: 'break-all',
                     }}
                   >
-                    <Video size={14} />
-                    <span>{confirmedAppt.meetingLink}</span>
+                    {confirmedAppt.meetingLink}
                   </a>
                 </div>
               )}
@@ -178,19 +176,15 @@ const SlotBookingModal = ({ isOpen, onClose, request, onSuccess }) => {
                 <div
                   style={{
                     padding: '0.85rem',
-                    background: '#fef2f2',
+                    background: '#fdf2f2',
                     border: '1px solid #fecaca',
                     borderRadius: '8px',
-                    color: '#991b1b',
+                    color: '#8c1616',
                     fontSize: '0.84rem',
                     marginBottom: '1rem',
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: '0.5rem',
                   }}
                 >
-                  <AlertCircle size={18} style={{ flexShrink: 0, marginTop: '2px' }} />
-                  <div>{errorMsg}</div>
+                  {errorMsg}
                 </div>
               )}
 
@@ -206,7 +200,7 @@ const SlotBookingModal = ({ isOpen, onClose, request, onSuccess }) => {
                   marginBottom: '1.25rem',
                 }}
               >
-                ℹ️ <strong>Advance Booking Notice:</strong> Routine counseling sessions must be scheduled with a minimum of 24 hours notice.
+                <strong>Advance Booking Notice:</strong> Routine counseling sessions must be scheduled with a minimum of 24 hours notice.
               </div>
 
               {/* Consultation Mode */}
@@ -309,7 +303,6 @@ const SlotBookingModal = ({ isOpen, onClose, request, onSuccess }) => {
                 className="btn btn-primary"
                 disabled={booking || slots.length === 0 || !selectedSlotId}
               >
-                <Calendar size={15} />
                 <span>{booking ? 'Locking Slot...' : 'Confirm Appointment'}</span>
               </button>
             </div>

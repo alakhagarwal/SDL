@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import api from '../api';
 import CrisisHotlineModal from './CrisisHotlineModal';
-import { X, AlertCircle, ShieldCheck, CheckCircle2, Send, Info } from 'lucide-react';
 
 const RequestSupportModal = ({ isOpen, onClose, services, selectedService, onSuccess }) => {
   const [serviceId, setServiceId] = useState(selectedService?.serviceId || (services[0]?.serviceId || ''));
@@ -56,11 +55,21 @@ const RequestSupportModal = ({ isOpen, onClose, services, selectedService, onSuc
                 Submit Confidential Wellness Support Request
               </h3>
               <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: 0 }}>
-                Formal Institutional Intake & Clinical Routing
+                Formal Institutional Intake &amp; Clinical Routing
               </p>
             </div>
-            <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-              <X size={20} color="#64748b" />
+            <button
+              onClick={onClose}
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                fontSize: '1.25rem',
+                color: '#64748b',
+                fontWeight: 700,
+              }}
+            >
+              ×
             </button>
           </div>
 
@@ -70,19 +79,15 @@ const RequestSupportModal = ({ isOpen, onClose, services, selectedService, onSuc
                 <div
                   style={{
                     padding: '0.85rem 1rem',
-                    background: '#fef2f2',
+                    background: '#fdf2f2',
                     border: '1px solid #fecaca',
                     borderRadius: '8px',
-                    color: '#991b1b',
+                    color: '#8c1616',
                     fontSize: '0.84rem',
                     marginBottom: '1.25rem',
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: '0.5rem',
                   }}
                 >
-                  <AlertCircle size={18} style={{ flexShrink: 0, marginTop: '2px' }} />
-                  <div>{errorMsg}</div>
+                  {errorMsg}
                 </div>
               )}
 
@@ -155,8 +160,8 @@ const RequestSupportModal = ({ isOpen, onClose, services, selectedService, onSuc
 
                   <label
                     style={{
-                      border: urgencyLevel === 'URGENT' ? '2px solid var(--accent-red)' : '1px solid var(--border)',
-                      background: urgencyLevel === 'URGENT' ? '#fef2f2' : '#ffffff',
+                      border: urgencyLevel === 'URGENT' ? '2px solid #8c1616' : '1px solid var(--border)',
+                      background: urgencyLevel === 'URGENT' ? '#fdf2f2' : '#ffffff',
                       borderRadius: '8px',
                       padding: '0.65rem',
                       cursor: 'pointer',
@@ -171,7 +176,7 @@ const RequestSupportModal = ({ isOpen, onClose, services, selectedService, onSuc
                       onChange={handleUrgencyChange}
                       style={{ display: 'none' }}
                     />
-                    <div style={{ fontWeight: 600, fontSize: '0.85rem', color: '#b91c1c' }}>🚨 Urgent</div>
+                    <div style={{ fontWeight: 600, fontSize: '0.85rem', color: '#8c1616' }}>Urgent</div>
                     <div style={{ fontSize: '0.72rem', color: '#64748b' }}>Immediate triage alert (24/7)</div>
                   </label>
                 </div>
@@ -206,7 +211,7 @@ const RequestSupportModal = ({ isOpen, onClose, services, selectedService, onSuc
 
               {/* Description */}
               <div className="form-group">
-                <label className="form-label">Background & Specific Concern Details</label>
+                <label className="form-label">Background &amp; Specific Concern Details</label>
                 <textarea
                   className="form-textarea"
                   rows={3}
@@ -236,14 +241,10 @@ const RequestSupportModal = ({ isOpen, onClose, services, selectedService, onSuc
                   background: '#f8fafc',
                   border: '1px solid #e2e8f0',
                   borderRadius: '8px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
                   fontSize: '0.78rem',
                   color: '#475569',
                 }}
               >
-                <ShieldCheck size={18} color="var(--primary)" style={{ flexShrink: 0 }} />
                 <span>
                   <strong>Strict Confidentiality Guarantee:</strong> Clinical notes are encrypted and restricted solely to assigned institutional psychological staff.
                 </span>
@@ -255,7 +256,6 @@ const RequestSupportModal = ({ isOpen, onClose, services, selectedService, onSuc
                 Cancel
               </button>
               <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-                <Send size={15} />
                 <span>{isSubmitting ? 'Submitting Request...' : 'Submit Support Request'}</span>
               </button>
             </div>

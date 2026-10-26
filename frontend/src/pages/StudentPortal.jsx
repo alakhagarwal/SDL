@@ -5,22 +5,7 @@ import HabitWidget from '../components/HabitWidget';
 import RequestSupportModal from '../components/RequestSupportModal';
 import SlotBookingModal from '../components/SlotBookingModal';
 import CrisisHotlineModal from '../components/CrisisHotlineModal';
-import {
-  HeartHandshake,
-  Calendar,
-  Clock,
-  Video,
-  MapPin,
-  PlusCircle,
-  AlertTriangle,
-  BookOpen,
-  Search,
-  Filter,
-  CheckCircle,
-  XCircle,
-  Shield,
-  LifeBuoy
-} from 'lucide-react';
+
 
 const StudentPortal = () => {
   const { user } = useAuth();
@@ -101,12 +86,12 @@ const StudentPortal = () => {
       {/* Student Hero Banner */}
       <div
         style={{
-          background: 'linear-gradient(135deg, #8b1523 0%, #6b0f1a 60%, #4d0910 100%)',
+          background: 'linear-gradient(135deg, #8c1616 0%, #681010 60%, #4a0b0b 100%)',
           borderRadius: '14px',
           padding: '1.75rem 2rem',
           color: '#ffffff',
           marginBottom: '1.75rem',
-          boxShadow: '0 8px 20px rgba(139, 21, 35, 0.25)',
+          boxShadow: '0 8px 20px rgba(140, 22, 22, 0.25)',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
@@ -131,10 +116,9 @@ const StudentPortal = () => {
         <div style={{ display: 'flex', gap: '0.65rem', flexWrap: 'wrap' }}>
           <button
             className="btn"
-            style={{ background: '#ffffff', color: '#8b1523', fontWeight: 700, fontSize: '0.85rem' }}
+            style={{ background: '#ffffff', color: '#8c1616', fontWeight: 700, fontSize: '0.85rem' }}
             onClick={() => { setModalSelectedService(services[0]); setIsRequestModalOpen(true); }}
           >
-            <PlusCircle size={15} />
             <span>Request Support</span>
           </button>
           <button
@@ -142,7 +126,6 @@ const StudentPortal = () => {
             style={{ background: 'rgba(255,255,255,0.12)', color: '#ffffff', border: '1px solid rgba(255,255,255,0.25)', fontSize: '0.85rem' }}
             onClick={() => setIsCrisisModalOpen(true)}
           >
-            <LifeBuoy size={15} />
             <span>Crisis Helplines</span>
           </button>
         </div>
@@ -195,14 +178,12 @@ const StudentPortal = () => {
                   className="btn btn-sm btn-primary"
                   onClick={() => { setModalSelectedService(services[0]); setIsRequestModalOpen(true); }}
                 >
-                  <PlusCircle size={14} />
                   <span>New Request</span>
                 </button>
               </div>
 
               {myRequests.length === 0 ? (
                 <div className="empty-state">
-                  <HeartHandshake size={32} color="#d1d5db" />
                   <p style={{ fontWeight: 600, color: '#6b7280' }}>No active support requests.</p>
                   <p>Browse services to submit a confidential inquiry.</p>
                 </div>
@@ -255,7 +236,6 @@ const StudentPortal = () => {
                               style={{ background: '#16a34a', color: '#ffffff', fontWeight: 700 }}
                               onClick={() => { setSelectedTriagedRequest(req); setIsSlotModalOpen(true); }}
                             >
-                              <Calendar size={14} />
                               <span>Schedule Appointment Slot</span>
                             </button>
                           )}
@@ -265,9 +245,8 @@ const StudentPortal = () => {
                             <button
                               className="btn btn-sm btn-secondary"
                               onClick={() => handleCancelRequest(req.requestId)}
-                              style={{ color: '#991b1b' }}
+                              style={{ color: '#8c1616' }}
                             >
-                              <XCircle size={14} />
                               <span>Withdraw</span>
                             </button>
                           )}
@@ -292,7 +271,6 @@ const StudentPortal = () => {
 
               {myAppointments.filter((a) => a.status === 'CONFIRMED').length === 0 ? (
                 <div style={{ textAlign: 'center', padding: '2rem', color: '#64748b' }}>
-                  <Calendar size={32} color="#cbd5e1" style={{ marginBottom: '0.4rem' }} />
                   <p style={{ fontSize: '0.85rem' }}>No upcoming confirmed consultations scheduled.</p>
                 </div>
               ) : (
@@ -320,9 +298,9 @@ const StudentPortal = () => {
                           <span className="badge badge-scheduled">CONFIRMED</span>
                         </div>
                         <div style={{ fontSize: '0.8rem', color: '#475569', display: 'flex', gap: '1rem' }}>
-                          <span>📅 {appt.appointmentDate}</span>
-                          <span>⏰ {appt.startTime?.substring(0, 5)} - {appt.endTime?.substring(0, 5)}</span>
-                          <span>{appt.mode === 'Telehealth' ? '🌐 Telehealth' : '🏛️ ' + appt.venue}</span>
+                          <span>Date: {appt.appointmentDate}</span>
+                          <span>Time: {appt.startTime?.substring(0, 5)} - {appt.endTime?.substring(0, 5)}</span>
+                          <span>Mode: {appt.mode === 'Telehealth' ? 'Telehealth' : appt.venue}</span>
                         </div>
                       </div>
 
@@ -335,7 +313,6 @@ const StudentPortal = () => {
                             className="btn btn-sm btn-primary"
                             style={{ textDecoration: 'none' }}
                           >
-                            <Video size={14} />
                             <span>Join Video Call</span>
                           </a>
                         )}
@@ -386,13 +363,11 @@ const StudentPortal = () => {
               ))}
             </div>
 
-            <div style={{ position: 'relative', width: '280px' }}>
-              <Search size={16} color="#94a3b8" style={{ position: 'absolute', left: '10px', top: '10px' }} />
+            <div style={{ width: '260px' }}>
               <input
                 type="text"
                 className="form-input"
                 placeholder="Search services or topics..."
-                style={{ paddingLeft: '2rem' }}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -419,7 +394,7 @@ const StudentPortal = () => {
                       {service.category}
                     </span>
                     <span style={{ fontSize: '0.75rem', color: '#059669', fontWeight: 600 }}>
-                      ● Active Intake
+                      Active Intake
                     </span>
                   </div>
 
@@ -443,7 +418,6 @@ const StudentPortal = () => {
                   style={{ width: '100%' }}
                   onClick={() => { setModalSelectedService(service); setIsRequestModalOpen(true); }}
                 >
-                  <PlusCircle size={15} />
                   <span>Request Support in this Domain</span>
                 </button>
               </div>
@@ -466,7 +440,6 @@ const StudentPortal = () => {
 
           {myAppointments.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '3rem', color: '#64748b' }}>
-              <Calendar size={40} color="#cbd5e1" style={{ marginBottom: '0.75rem' }} />
               <p style={{ fontWeight: 600 }}>No consultation records found.</p>
               <p style={{ fontSize: '0.8rem' }}>Once your support requests are triaged, you can book consultation slots.</p>
             </div>
@@ -496,9 +469,9 @@ const StudentPortal = () => {
                       </span>
                     </div>
                     <div style={{ fontSize: '0.84rem', color: '#475569', display: 'flex', gap: '1.25rem', flexWrap: 'wrap' }}>
-                      <span>📅 Date: {a.appointmentDate}</span>
-                      <span>⏰ Time: {a.startTime} – {a.endTime}</span>
-                      <span>📍 Mode: {a.mode} ({a.venue})</span>
+                      <span>Date: {a.appointmentDate}</span>
+                      <span>Time: {a.startTime} – {a.endTime}</span>
+                      <span>Mode: {a.mode} ({a.venue})</span>
                     </div>
                   </div>
 
@@ -511,7 +484,6 @@ const StudentPortal = () => {
                         className="btn btn-sm btn-primary"
                         style={{ textDecoration: 'none' }}
                       >
-                        <Video size={14} />
                         <span>Launch Telehealth Room</span>
                       </a>
                     )}
@@ -572,7 +544,6 @@ const StudentPortal = () => {
                 onClick={() => alert(`Article Content:\n\n${art.contentBody}`)}
                 style={{ width: '100%' }}
               >
-                <BookOpen size={14} />
                 <span>Read Full Guide</span>
               </button>
             </div>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import api from '../api';
-import { X, CheckCircle, AlertTriangle, ShieldAlert, UserCheck, Send } from 'lucide-react';
 
 const TriageEvaluationModal = ({ isOpen, onClose, request, onSuccess }) => {
   const [priorityLevel, setPriorityLevel] = useState(request?.urgencyLevel || 'PRIORITY');
@@ -43,17 +42,27 @@ const TriageEvaluationModal = ({ isOpen, onClose, request, onSuccess }) => {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header" style={{ borderTop: isEscalationMode ? '4px solid #dc2626' : '4px solid var(--primary)' }}>
+        <div className="modal-header" style={{ borderTop: isEscalationMode ? '4px solid #8c1616' : '4px solid var(--primary)' }}>
           <div>
-            <h3 style={{ fontSize: '1.2rem', color: isEscalationMode ? '#dc2626' : 'var(--primary)', margin: 0 }}>
-              {isEscalationMode ? '🚨 Emergency Clinical Escalation Protocol' : 'Clinical Triage & Case Evaluation'}
+            <h3 style={{ fontSize: '1.2rem', color: isEscalationMode ? '#8c1616' : 'var(--primary)', margin: 0 }}>
+              {isEscalationMode ? 'Emergency Clinical Escalation Protocol' : 'Clinical Triage & Case Evaluation'}
             </h3>
             <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: 0 }}>
               Request #REQ-{request.requestId} • {request.student?.fullName} ({request.student?.rollNumber})
             </p>
           </div>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-            <X size={20} color="#64748b" />
+          <button
+            onClick={onClose}
+            style={{
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              fontSize: '1.25rem',
+              color: '#64748b',
+              fontWeight: 700,
+            }}
+          >
+            ×
           </button>
         </div>
 
@@ -63,10 +72,10 @@ const TriageEvaluationModal = ({ isOpen, onClose, request, onSuccess }) => {
               <div
                 style={{
                   padding: '0.85rem',
-                  background: '#fef2f2',
+                  background: '#fdf2f2',
                   border: '1px solid #fecaca',
                   borderRadius: '8px',
-                  color: '#991b1b',
+                  color: '#8c1616',
                   fontSize: '0.84rem',
                   marginBottom: '1rem',
                 }}
@@ -105,16 +114,14 @@ const TriageEvaluationModal = ({ isOpen, onClose, request, onSuccess }) => {
                 style={{ flex: 1 }}
                 onClick={() => setIsEscalationMode(false)}
               >
-                <UserCheck size={15} />
                 <span>Routine / Priority Triage</span>
               </button>
               <button
                 type="button"
                 className={`btn btn-sm ${isEscalationMode ? 'btn-danger' : 'btn-secondary'}`}
-                style={{ flex: 1 }}
+                style={{ flex: 1, background: isEscalationMode ? '#8c1616' : undefined, color: isEscalationMode ? '#ffffff' : undefined }}
                 onClick={() => setIsEscalationMode(true)}
               >
-                <ShieldAlert size={15} />
                 <span>Emergency Medical Escalation</span>
               </button>
             </div>
@@ -124,15 +131,15 @@ const TriageEvaluationModal = ({ isOpen, onClose, request, onSuccess }) => {
                 <div
                   style={{
                     padding: '0.75rem',
-                    background: '#fef2f2',
+                    background: '#fdf2f2',
                     border: '1px solid #fecaca',
                     borderRadius: '8px',
                     fontSize: '0.78rem',
-                    color: '#991b1b',
+                    color: '#8c1616',
                     marginBottom: '1rem',
                   }}
                 >
-                  ⚠️ <strong>Immediate Medical Referral:</strong> This action dispatches a priority referral directly to the Campus Health Center and logs an institutional audit entry.
+                  <strong>Immediate Medical Referral:</strong> This action dispatches a priority referral directly to the Campus Health Center and logs an institutional audit entry.
                 </div>
                 <div className="form-group">
                   <label className="form-label">Clinical Risk Justification & Escalation Reason</label>
@@ -182,10 +189,10 @@ const TriageEvaluationModal = ({ isOpen, onClose, request, onSuccess }) => {
             </button>
             <button
               type="submit"
-              className={`btn ${isEscalationMode ? 'btn-danger' : 'btn-primary'}`}
+              className="btn btn-primary"
+              style={{ background: isEscalationMode ? '#8c1616' : undefined }}
               disabled={submitting}
             >
-              <Send size={15} />
               <span>
                 {submitting
                   ? 'Processing...'

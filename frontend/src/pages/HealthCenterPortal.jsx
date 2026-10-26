@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api';
-import { Stethoscope, AlertTriangle, CheckCircle, ShieldAlert } from 'lucide-react';
 
 const HealthCenterPortal = () => {
   const [referrals, setReferrals] = useState([]);
@@ -41,16 +40,15 @@ const HealthCenterPortal = () => {
       {/* Health Center Banner */}
       <div
         style={{
-          background: 'linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%)',
+          background: 'linear-gradient(135deg, #8c1616 0%, #681010 60%, #4a0b0b 100%)',
           borderRadius: '16px',
           padding: '2rem',
           color: '#ffffff',
           marginBottom: '2rem',
-          boxShadow: '0 10px 25px -5px rgba(153, 27, 27, 0.3)',
+          boxShadow: '0 10px 25px -5px rgba(140, 22, 22, 0.3)',
         }}
       >
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', background: 'rgba(255,255,255,0.15)', padding: '0.25rem 0.75rem', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 600, marginBottom: '0.75rem' }}>
-          <Stethoscope size={14} />
           <span>Campus Health Center • Medical Referral & Emergency Desk</span>
         </div>
         <h2 style={{ fontSize: '1.85rem', color: '#ffffff', fontWeight: 700, marginBottom: '0.35rem' }}>
@@ -73,7 +71,6 @@ const HealthCenterPortal = () => {
 
         {referrals.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '3rem', color: '#64748b' }}>
-            <CheckCircle size={40} color="#10b981" style={{ marginBottom: '0.75rem' }} />
             <p style={{ fontWeight: 600 }}>No Active Emergency Referrals</p>
             <p style={{ fontSize: '0.8rem' }}>Campus medical unit is currently all clear.</p>
           </div>
@@ -87,13 +84,13 @@ const HealthCenterPortal = () => {
                   border: '1px solid #fecaca',
                   borderRadius: '12px',
                   background: ref.referralStatus === 'PENDING_INTAKE' ? '#fff1f2' : '#ffffff',
-                  borderLeft: '5px solid #dc2626',
+                  borderLeft: '5px solid #8c1616',
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
                   <div>
-                    <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#dc2626', textTransform: 'uppercase' }}>
-                      🚨 {ref.priority} • #REF-{ref.referralId}
+                    <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#8c1616', textTransform: 'uppercase' }}>
+                      {ref.priority} • #REF-{ref.referralId}
                     </span>
                     <h4 style={{ fontSize: '1.05rem', margin: '0.2rem 0' }}>
                       Student: {ref.request?.student?.fullName} ({ref.request?.student?.rollNumber} • {ref.request?.student?.department})
@@ -110,7 +107,7 @@ const HealthCenterPortal = () => {
                       padding: '0.25rem 0.65rem',
                       borderRadius: '9999px',
                       background: ref.referralStatus === 'PENDING_INTAKE' ? '#fee2e2' : '#d1fae5',
-                      color: ref.referralStatus === 'PENDING_INTAKE' ? '#991b1b' : '#065f46',
+                      color: ref.referralStatus === 'PENDING_INTAKE' ? '#8c1616' : '#065f46',
                     }}
                   >
                     {ref.referralStatus}
@@ -142,7 +139,7 @@ const HealthCenterPortal = () => {
                   </div>
                 ) : (
                   <div style={{ fontSize: '0.8rem', color: '#059669', fontStyle: 'italic' }}>
-                    ✓ Intake acknowledged. Notes: "{ref.intakeNotes || 'Intake completed.'}"
+                    Intake acknowledged. Notes: "{ref.intakeNotes || 'Intake completed.'}"
                   </div>
                 )}
               </div>
@@ -155,8 +152,8 @@ const HealthCenterPortal = () => {
       {selectedReferral && (
         <div className="modal-overlay" onClick={() => setSelectedReferral(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header" style={{ borderTop: '4px solid #dc2626' }}>
-              <h3 style={{ margin: 0, color: '#dc2626' }}>
+            <div className="modal-header" style={{ borderTop: '4px solid #8c1616' }}>
+              <h3 style={{ margin: 0, color: '#8c1616' }}>
                 Acknowledge Emergency Intake (#REF-{selectedReferral.referralId})
               </h3>
             </div>

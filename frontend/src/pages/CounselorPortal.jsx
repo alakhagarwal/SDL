@@ -3,19 +3,7 @@ import api from '../api';
 import { useAuth } from '../context/AuthContext';
 import TriageEvaluationModal from '../components/TriageEvaluationModal';
 import CompleteSessionModal from '../components/CompleteSessionModal';
-import {
-  HeartPulse,
-  Calendar,
-  Clock,
-  Video,
-  CheckCircle,
-  AlertCircle,
-  FileText,
-  UserCheck,
-  PlusCircle,
-  ShieldAlert,
-  Send
-} from 'lucide-react';
+
 
 const CounselorPortal = () => {
   const { user } = useAuth();
@@ -163,8 +151,7 @@ const CounselorPortal = () => {
 
           {triageQueue.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '3rem', color: '#64748b' }}>
-              <CheckCircle size={40} color="#10b981" style={{ marginBottom: '0.75rem' }} />
-              <p style={{ fontWeight: 600 }}>Triage Queue is Clean!</p>
+              <p style={{ fontWeight: 600 }}>Triage Queue is Clean</p>
               <p style={{ fontSize: '0.8rem' }}>No student support requests currently awaiting review.</p>
             </div>
           ) : (
@@ -177,7 +164,7 @@ const CounselorPortal = () => {
                     borderRadius: '12px',
                     padding: '1.25rem',
                     background: req.urgencyLevel === 'URGENT' ? '#fff1f2' : '#ffffff',
-                    borderLeft: req.urgencyLevel === 'URGENT' ? '5px solid #dc2626' : '5px solid #f59e0b',
+                    borderLeft: req.urgencyLevel === 'URGENT' ? '5px solid #8c1616' : '5px solid #f59e0b',
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.65rem' }}>
@@ -200,7 +187,7 @@ const CounselorPortal = () => {
 
                     <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
                       <span className={`badge badge-${req.urgencyLevel?.toLowerCase()}`}>
-                        {req.urgencyLevel === 'URGENT' ? '🚨 URGENT' : req.urgencyLevel}
+                        {req.urgencyLevel}
                       </span>
                     </div>
                   </div>
@@ -218,7 +205,6 @@ const CounselorPortal = () => {
                       className="btn btn-sm btn-primary"
                       onClick={() => { setSelectedTriageRequest(req); setIsTriageModalOpen(true); }}
                     >
-                      <UserCheck size={14} />
                       <span>Evaluate & Triage Case</span>
                     </button>
                   </div>
@@ -243,7 +229,6 @@ const CounselorPortal = () => {
 
           {appointments.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '3rem', color: '#64748b' }}>
-              <Calendar size={40} color="#cbd5e1" style={{ marginBottom: '0.75rem' }} />
               <p style={{ fontWeight: 600 }}>No consultations scheduled yet.</p>
             </div>
           ) : (
@@ -276,9 +261,9 @@ const CounselorPortal = () => {
                     </div>
 
                     <div style={{ fontSize: '0.84rem', color: '#475569', display: 'flex', gap: '1.25rem', flexWrap: 'wrap' }}>
-                      <span>📅 Date: {appt.appointmentDate}</span>
-                      <span>⏰ Time: {appt.startTime} – {appt.endTime}</span>
-                      <span>📍 Mode: {appt.mode} ({appt.venue})</span>
+                      <span>Date: {appt.appointmentDate}</span>
+                      <span>Time: {appt.startTime} – {appt.endTime}</span>
+                      <span>Mode: {appt.mode} ({appt.venue})</span>
                     </div>
                   </div>
 
@@ -291,7 +276,6 @@ const CounselorPortal = () => {
                         className="btn btn-sm btn-primary"
                         style={{ textDecoration: 'none' }}
                       >
-                        <Video size={14} />
                         <span>Launch Telehealth Call</span>
                       </a>
                     )}
@@ -301,7 +285,6 @@ const CounselorPortal = () => {
                         className="btn btn-sm btn-secondary"
                         onClick={() => { setSelectedAppointment(appt); setIsCompleteModalOpen(true); }}
                       >
-                        <FileText size={14} />
                         <span>Conclude & Log Notes</span>
                       </button>
                     )}
@@ -376,7 +359,6 @@ const CounselorPortal = () => {
               </div>
 
               <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
-                <PlusCircle size={15} />
                 <span>Publish Slot to Student Calendar</span>
               </button>
             </form>
@@ -391,7 +373,6 @@ const CounselorPortal = () => {
 
             {mySlots.length === 0 ? (
               <div style={{ textAlign: 'center', padding: '2rem', color: '#64748b' }}>
-                <Clock size={32} color="#cbd5e1" style={{ marginBottom: '0.5rem' }} />
                 <p style={{ fontSize: '0.85rem' }}>No availability slots published yet.</p>
               </div>
             ) : (
@@ -410,8 +391,8 @@ const CounselorPortal = () => {
                     }}
                   >
                     <div>
-                      <div style={{ fontWeight: 600, fontSize: '0.88rem' }}>📅 {s.slotDate}</div>
-                      <div style={{ fontSize: '0.78rem', color: '#64748b' }}>⏰ {s.startTime.substring(0, 5)} – {s.endTime.substring(0, 5)}</div>
+                      <div style={{ fontWeight: 600, fontSize: '0.88rem' }}>Date: {s.slotDate}</div>
+                      <div style={{ fontSize: '0.78rem', color: '#64748b' }}>Time: {s.startTime.substring(0, 5)} – {s.endTime.substring(0, 5)}</div>
                     </div>
                     <span
                       style={{

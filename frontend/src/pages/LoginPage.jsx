@@ -1,19 +1,5 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import {
-  HeartPulse,
-  Shield,
-  Lock,
-  Mail,
-  User,
-  AlertCircle,
-  ArrowRight,
-  Building2,
-  CheckCircle2,
-  PhoneCall,
-  Sparkles,
-  LifeBuoy
-} from 'lucide-react';
 
 const LoginPage = () => {
   const { login, register } = useAuth();
@@ -83,7 +69,6 @@ const LoginPage = () => {
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Building2 size={13} color="#fecdd3" />
             <span style={{ fontWeight: 600 }}>The LNM Institute of Information Technology, Jaipur</span>
             <span style={{ opacity: 0.6 }}>•</span>
             <span style={{ opacity: 0.85 }}>Deemed-to-be-University</span>
@@ -122,7 +107,7 @@ const LoginPage = () => {
           {/* Left Hero Panel - LNMIIT Institutional Care Showcase */}
           <div
             style={{
-              background: 'linear-gradient(145deg, #8b1523 0%, #4c070e 100%)',
+              background: 'linear-gradient(145deg, #8c1616 0%, #4a0b0b 100%)',
               color: '#ffffff',
               padding: '3rem 2.5rem',
               display: 'flex',
@@ -140,28 +125,30 @@ const LoginPage = () => {
                     height: '46px',
                     borderRadius: '12px',
                     background: '#ffffff',
-                    color: 'var(--primary)',
+                    color: '#8c1616',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    fontWeight: 800,
+                    fontSize: '1.05rem',
                     boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
                   }}
                 >
-                  <HeartPulse size={26} />
+                  SWP
                 </div>
                 <div>
                   <h2 style={{ fontSize: '1.25rem', color: '#ffffff', fontWeight: 700, margin: 0, lineHeight: 1.2 }}>
                     Student Wellness Portal
                   </h2>
-                  <p style={{ fontSize: '0.75rem', color: '#fecdd3', textTransform: 'uppercase', letterSpacing: '0.05em', margin: 0 }}>
-                    Center for Counseling & Psychological Support
+                  <p style={{ fontSize: '0.75rem', color: '#fecaca', textTransform: 'uppercase', letterSpacing: '0.05em', margin: 0 }}>
+                    Center for Counseling &amp; Psychological Support
                   </p>
                 </div>
               </div>
 
               {/* Mission Statement */}
               <h3 style={{ fontSize: '1.65rem', fontWeight: 700, color: '#ffffff', lineHeight: 1.3, marginBottom: '1rem' }}>
-                Fostering Mental Health, Resilience & Academic Excellence
+                Fostering Mental Health, Resilience &amp; Academic Excellence
               </h3>
               <p style={{ fontSize: '0.88rem', color: '#fed7aa', lineHeight: 1.55, marginBottom: '2rem' }}>
                 A confidential, conflict-free institutional sanctuary providing students with professional psychological counseling, atomic slot scheduling, daily self-care habit analytics, and 24/7 campus crisis escalation.
@@ -169,29 +156,17 @@ const LoginPage = () => {
 
               {/* Key Pillars */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '2rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-                  <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <CheckCircle2 size={14} color="#ffffff" />
-                  </div>
-                  <span style={{ fontSize: '0.84rem', color: '#ffffff' }}>Strict Patient Confidentiality & Encrypted Records</span>
+                <div style={{ fontSize: '0.84rem', color: '#ffffff' }}>
+                  • Strict Patient Confidentiality &amp; Encrypted Records
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-                  <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <CheckCircle2 size={14} color="#ffffff" />
-                  </div>
-                  <span style={{ fontSize: '0.84rem', color: '#ffffff' }}>Certified Clinical Psychologists & Faculty Counselors</span>
+                <div style={{ fontSize: '0.84rem', color: '#ffffff' }}>
+                  • Certified Clinical Psychologists &amp; Faculty Counselors
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-                  <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <CheckCircle2 size={14} color="#ffffff" />
-                  </div>
-                  <span style={{ fontSize: '0.84rem', color: '#ffffff' }}>Instant Telehealth Rooms & SAC In-Person Consultation</span>
+                <div style={{ fontSize: '0.84rem', color: '#ffffff' }}>
+                  • Instant Telehealth Rooms &amp; SAC In-Person Consultation
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-                  <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <CheckCircle2 size={14} color="#ffffff" />
-                  </div>
-                  <span style={{ fontSize: '0.84rem', color: '#ffffff' }}>Emergency Campus Medical Center Referral Desk</span>
+                <div style={{ fontSize: '0.84rem', color: '#ffffff' }}>
+                  • Emergency Campus Medical Center Referral Desk
                 </div>
               </div>
             </div>
@@ -203,12 +178,8 @@ const LoginPage = () => {
                 border: '1px solid rgba(255,255,255,0.2)',
                 borderRadius: '12px',
                 padding: '0.85rem 1rem',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.75rem',
               }}
             >
-              <LifeBuoy size={20} color="#fecdd3" style={{ flexShrink: 0 }} />
               <div style={{ fontSize: '0.76rem', lineHeight: 1.35, color: '#ffffff' }}>
                 <strong>Immediate Campus Assistance:</strong> Dial extension <strong>5191700</strong> from hostel intercoms or visit the SAC ground floor medical unit.
               </div>
@@ -263,18 +234,14 @@ const LoginPage = () => {
               <div
                 style={{
                   padding: '0.75rem 1rem',
-                  background: '#fef2f2',
+                  background: '#fdf2f2',
                   border: '1px solid #fecaca',
                   borderRadius: '8px',
-                  color: '#991b1b',
+                  color: '#8c1616',
                   fontSize: '0.82rem',
                   marginBottom: '1.25rem',
-                  display: 'flex',
-                  alignItems: 'flex-start',
-                  gap: '0.5rem',
                 }}
               >
-                <AlertCircle size={16} style={{ flexShrink: 0, marginTop: '2px' }} />
                 <div>{errorMsg}</div>
               </div>
             )}
@@ -384,7 +351,6 @@ const LoginPage = () => {
                 disabled={loading}
               >
                 <span>{loading ? 'Validating Credentials...' : isRegister ? 'Complete Registration' : 'Sign In to Portal'}</span>
-                <ArrowRight size={16} />
               </button>
             </form>
 
@@ -397,12 +363,8 @@ const LoginPage = () => {
                 borderRadius: '8px',
                 fontSize: '0.75rem',
                 color: '#64748b',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
               }}
             >
-              <Shield size={16} color="var(--primary)" style={{ flexShrink: 0 }} />
               <span>
                 Protected under institutional directory access. Use your official LNMIIT email address to sign in.
               </span>

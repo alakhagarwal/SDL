@@ -2,18 +2,6 @@ import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNotifications } from '../context/NotificationContext';
 import CrisisHotlineModal from './CrisisHotlineModal';
-import {
-  Bell,
-  LogOut,
-  Shield,
-  User,
-  HeartPulse,
-  Stethoscope,
-  PhoneCall,
-  AlertCircle,
-  Building2,
-  Lock
-} from 'lucide-react';
 
 const Navbar = () => {
   const { user, role, logout } = useAuth();
@@ -26,19 +14,17 @@ const Navbar = () => {
       <div className="inst-utility-bar">
         <div className="inst-utility-container">
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-            <Building2 size={13} color="#fecdd3" />
             <span style={{ fontWeight: 600 }}>The LNM Institute of Information Technology, Jaipur</span>
             <span style={{ opacity: 0.6 }}>•</span>
             <span style={{ opacity: 0.85 }}>Deemed-to-be-University (NAAC 'A' Grade)</span>
           </div>
 
           <div className="inst-utility-links">
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#fecdd3' }}>
-              <PhoneCall size={12} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#fecaca' }}>
               <span>Campus Medical Center: <strong>+91 141 2688000</strong></span>
             </div>
             <span style={{ opacity: 0.5 }}>|</span>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#fecdd3' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#fecaca' }}>
               <span>Tele-MANAS Toll-Free: <strong>14416</strong></span>
             </div>
             <span style={{ opacity: 0.5 }}>|</span>
@@ -53,14 +39,10 @@ const Navbar = () => {
                 fontSize: '0.72rem',
                 fontWeight: 700,
                 cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.3rem',
               }}
               title="24/7 Campus Crisis Helpline Protocol"
             >
-              <AlertCircle size={12} color="#fca5a5" />
-              <span>Emergency 24x7</span>
+              Emergency 24x7
             </button>
           </div>
         </div>
@@ -71,7 +53,7 @@ const Navbar = () => {
         <div className="nav-container">
           <div className="brand-wrapper">
             <div className="brand-logo-badge">
-              <HeartPulse size={24} />
+              SWP
             </div>
             <div className="brand-titles">
               <h1>Student Wellness Portal</h1>
@@ -82,7 +64,7 @@ const Navbar = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             {user && (
               <>
-                {/* In-App Notification Bell */}
+                {/* In-App Notification Trigger */}
                 <button
                   onClick={() => setIsDrawerOpen(true)}
                   style={{
@@ -90,32 +72,28 @@ const Navbar = () => {
                     background: '#f8fafc',
                     border: '1px solid #e2e8f0',
                     borderRadius: '8px',
-                    padding: '0.5rem',
+                    padding: '0.45rem 0.75rem',
                     color: '#334155',
+                    fontSize: '0.82rem',
+                    fontWeight: 600,
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'center',
+                    gap: '0.4rem',
+                    cursor: 'pointer',
                   }}
                   title="In-App Notifications"
                 >
-                  <Bell size={18} />
+                  <span>Alerts</span>
                   {unreadCount > 0 && (
                     <span
                       style={{
-                        position: 'absolute',
-                        top: '-4px',
-                        right: '-4px',
-                        background: '#dc2626',
+                        background: '#8c1616',
                         color: '#ffffff',
                         fontSize: '0.68rem',
                         fontWeight: 700,
                         borderRadius: '9999px',
-                        width: '18px',
-                        height: '18px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        boxShadow: '0 2px 4px rgba(220,38,38,0.4)',
+                        padding: '0.1rem 0.45rem',
+                        lineHeight: 1.2,
                       }}
                     >
                       {unreadCount}
@@ -149,7 +127,7 @@ const Navbar = () => {
                       fontSize: '0.8rem',
                     }}
                   >
-                    {role === 'STUDENT' ? <User size={16} /> : role === 'COUNSELOR' ? <HeartPulse size={16} /> : role === 'HEALTH_CENTER' ? <Stethoscope size={16} /> : <Shield size={16} />}
+                    {user.fullName?.charAt(0) || 'U'}
                   </div>
                   <div style={{ textAlign: 'left', lineHeight: 1.15 }}>
                     <div style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-main)' }}>
@@ -174,8 +152,7 @@ const Navbar = () => {
                   style={{ padding: '0.45rem 0.85rem' }}
                   title="Sign Out of Portal"
                 >
-                  <LogOut size={14} />
-                  <span>Sign Out</span>
+                  Sign Out
                 </button>
               </>
             )}

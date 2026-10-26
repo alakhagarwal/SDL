@@ -2,11 +2,11 @@
 
 :root {
   /* LNMIIT Institutional Primary Palette */
-  --primary: #8b1523;
-  --primary-hover: #76111d;
-  --primary-dark: #560a13;
-  --primary-light: #fef2f3;
-  --primary-border: #fecdd3;
+  --primary: #8c1616;
+  --primary-hover: #751212;
+  --primary-dark: #5e0e0e;
+  --primary-light: #fdf2f2;
+  --primary-border: #fecaca;
   --primary-accent: #b8860b; /* Warm University Gold */
 
   --secondary: #1e293b;
@@ -16,8 +16,8 @@
 
   --accent-amber: #b45309;
   --accent-amber-light: #fef3c7;
-  --accent-red: #dc2626;
-  --accent-red-light: #fee2e2;
+  --accent-red: #8c1616;
+  --accent-red-light: #fdf2f2;
   --accent-green: #059669;
   --accent-green-light: #d1fae5;
   --accent-blue: #2563eb;
@@ -27,7 +27,7 @@
   --bg-card: #ffffff;
   --bg-card-hover: #fafbfc;
   --border: #e5e9ef;
-  --border-focus: #8b1523;
+  --border-focus: #8c1616;
 
   --text-main: #111827;
   --text-sub: #374151;
@@ -163,14 +163,14 @@ a {
 .brand-logo-badge {
   width: 42px;
   height: 42px;
-  background: linear-gradient(145deg, #8b1523 0%, #560a13 100%);
+  background: linear-gradient(145deg, #8c1616 0%, #5e0e0e 100%);
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 11px;
   font-weight: 700;
-  box-shadow: 0 3px 8px rgba(139, 21, 35, 0.3);
+  box-shadow: 0 3px 8px rgba(140, 22, 22, 0.3);
 }
 
 .brand-titles h1 {
@@ -257,7 +257,7 @@ a {
 
 .btn-primary:hover:not(:disabled) {
   background-color: var(--primary-hover);
-  box-shadow: 0 3px 10px rgba(139, 21, 35, 0.22);
+  box-shadow: 0 3px 10px rgba(140, 22, 22, 0.22);
   transform: translateY(-1px);
 }
 
@@ -273,14 +273,14 @@ a {
 }
 
 .btn-danger {
-  background-color: var(--accent-red);
+  background-color: var(--primary);
   color: #ffffff;
-  border-color: var(--accent-red);
+  border-color: var(--primary);
 }
 
 .btn-danger:hover:not(:disabled) {
-  background-color: #b91c1c;
-  box-shadow: 0 3px 10px rgba(220, 38, 38, 0.22);
+  background-color: var(--primary-hover);
+  box-shadow: 0 3px 10px rgba(140, 22, 22, 0.22);
   transform: translateY(-1px);
 }
 
@@ -306,9 +306,9 @@ a {
 }
 
 .badge-urgent {
-  background-color: #fff1f2;
-  color: #be123c;
-  border-color: #fecdd3;
+  background-color: #fdf2f2;
+  color: #8c1616;
+  border-color: #fecaca;
 }
 
 .badge-priority {
@@ -457,7 +457,7 @@ a {
 .form-textarea:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(139, 21, 35, 0.1);
+  box-shadow: 0 0 0 3px rgba(140, 22, 22, 0.1);
 }
 
 /* ── Tabs Navigation ── */
